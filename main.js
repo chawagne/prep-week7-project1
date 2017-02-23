@@ -16,22 +16,27 @@ Have fun!
 */
 
 $(document).ready(function() {
-$("<h1>Movies</h1>").appendTo("main");
+$("<h1>Trivia</h1>").appendTo("main");
 
-
-var $xhr = $.getJSON('https://www.omdbapi.com/?t=Frozen');
-
+var $xhr = $.getJSON('http://www.omdbapi.com/?t=transformers');
 $xhr.done(function(data) {
-   if ($xhr.status !== 200) {
-       return;
-   }
-   console.log(data); });
+    if ($xhr.status !== 200) {
+        return;
+    }
+    console.log(data);
+    $("<p>Did you know</p>").appendTo("main");
+    $("<p>"+data.Title+" was released on "+data.Released+"</p>").appendTo("main");
+});
 
-   $xhr.fail(function(err) {
-     console.log(err);
- });
+$xhr.fail(function(err) {
+    console.log(err);
+});
 
 
+//This works too, but doesn't have any of the nice failsure stuff and may not wait until done.  I'll need to look into it.
+$.get("https://www.omdbapi.com/?t=Hackers", function(data) {
+    console.log(data);
+});
 
 
 
